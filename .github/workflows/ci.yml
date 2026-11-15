@@ -1,0 +1,99 @@
+name: CI
+
+on:
+  pull_request:
+    branches: [main]
+  push:
+    branches: [main]
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+jobs:
+  titulo-pr:
+    name: Título del PR
+    if: github.event_name == 'pull_request'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Validar Conventional Commits en el título
+        env:
+          PR_TITLE: ${{ github.event.pull_request.title }}
+        run: |
+          regex='^(feat|fix|docs|style|refactor|perf|test|build|ci|chore|revert)(\([a-z0-9-]+\))?!?: .{1,90}$'
+          if [[ ! "$PR_TITLE" =~ $regex ]] || [ ${#PR_TITLE} -gt 100 ]; then
+            echo "::error::El título del PR debe ser 'tipo(ámbito): descripción' (máx. 100 caracteres). Recibido: $PR_TITLE"
+            exit 1
+          fi
+          echo "Título válido: $PR_TITLE"
+
+  commits:
+    name: Commits (commitlint)
+    if: github.event_name == 'pull_request'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v7
+        with:
+          node-version: lts/*
+          cache: npm
+      - run: npm ci
+      - name: Validar los commits del PR
+        env:
+          BASE: ${{ github.event.pull_request.base.sha }}
+          HEAD: ${{ github.event.pull_request.head.sha }}
+        run: npx commitlint --from "$BASE" --to "$HEAD" --verbose
+
+  convivencia:
+    name: Convivencia con el híbrido
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - name: Sin co.miplata.app ni código del híbrido
+        run: |
+          mal=0
+          if grep -rIn --include='*.kt' --include='*.kts' --include='*.xml' --include='*.toml' --include='*.pro' --include='*.properties' --include='*.gradle' \
+               --exclude-dir=build --exclude-dir=.gradle --exclude-dir=node_modules --exclude-dir=docs --exclude-dir=.git 'co\.miplata\.app' . ; then
+            echo "::error::Aparece 'co.miplata.app'. Usa \${applicationId} / BuildConfig.APPLICATION_ID."; mal=1
+          fi
+          if find . \( -path ./node_modules -o -path ./.git \) -prune -o \( -name '*.tsx' -o -name 'capacitor.config.*' \) -print | grep .; then
+            echo "::error::Hay código del híbrido en el repo nativo (prohibido)."; mal=1
+          fi
+          exit $mal
+
+  android:
+    name: Compilar, lint y pruebas
+    runs-on: ubuntu-latest
+    timeout-minutes: 40
+    steps:
+      - uses: actions/checkout@v7
+      - name: ¿Hay proyecto Gradle?
+        id: gradle
+        run: |
+          if [ -f gradlew ] && [ -f settings.gradle.kts ]; then echo "existe=true" >> "$GITHUB_OUTPUT"; else echo "existe=false" >> "$GITHUB_OUTPUT"; echo "Todavía no hay proyecto Gradle (etapas 00): se omite."; fi
+      - uses: actions/setup-java@v5
+        if: steps.gradle.outputs.existe == 'true'
+        with:
+          distribution: temurin
+          java-version: 17
+      - uses: gradle/actions/setup-gradle@v6
+        if: steps.gradle.outputs.existe == 'true'
+      - name: Lint, pruebas unitarias y compilación debug
+        if: steps.gradle.outputs.existe == 'true'
+        run: |
+          chmod +x gradlew
+          ./gradlew lintDebug testDebugUnitTest assembleDebug --console=plain
+      - name: Guardar reportes si falla
+        if: failure() && steps.gradle.outputs.existe == 'true'
+        uses: actions/upload-artifact@v7
+        with:
+          name: reportes
+          path: |
+            **/build/reports/**
+            **/build/test-results/**
+          if-no-files-found: ignore

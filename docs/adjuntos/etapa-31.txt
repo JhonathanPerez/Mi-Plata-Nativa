@@ -1,0 +1,17 @@
+# Archivos del repo HÍBRIDO que se adjuntan en esta etapa (rutas relativas a la raíz del híbrido).
+# Los arma Armar-Adjunto.ps1. Una línea por archivo.
+native/android/BackupWorker.java
+native/android/BackupScheduler.java
+native/android/BackupScheduleStore.java
+native/android/BackupTiming.java
+native/android/BackupSchedulePlugin.java
+native/android/BackupNames.java
+native/android/RawDump.java
+native/android/SqliteDumpSource.java
+src/lib/autoBackup.ts
+src/lib/autoBackup.test.ts
+src/lib/backgroundBackup.ts
+src/app/AutoBackupSync.tsx
+src/services/autoBackupService.ts
+src/services/autoBackupService.test.ts
+src/lib/backupStore.ts

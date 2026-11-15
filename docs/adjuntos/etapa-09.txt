@@ -1,0 +1,16 @@
+# Archivos del repo HÍBRIDO que se adjuntan en esta etapa (rutas relativas a la raíz del híbrido).
+# Los arma Armar-Adjunto.ps1. Una línea por archivo.
+src/db/migrations/001_init.ts
+src/db/migrations/002_transferencia.ts
+src/db/migrations/003_pending_captures.ts
+src/db/migrations/004_paid_status_and_cycles.ts
+src/db/migrations/005_spam_learning.ts
+src/db/migrations/006_savings_accounts.ts
+src/db/migrations/007_savings_account_last4.ts
+src/db/migrations/008_expense_observations.ts
+src/db/migrations/migrations.test.ts
+src/db/mappers.ts
+src/db/types.ts
+src/db/seed.ts
+src/config/seeds.ts
+src/repositories/backupRepository.ts

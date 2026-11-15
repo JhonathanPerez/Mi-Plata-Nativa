@@ -1,0 +1,91 @@
+# ============================================================================
+#  PUBLICACIÓN — DESACTIVADO hasta la etapa 39 (ci/release-activar-publicacion).
+#  Cada job tiene `if: false`. La etapa 39 quita ese `false &&` y deja las condiciones reales.
+#  La primera publicación (etapa 40) sale como 1.0.0 sin etiqueta base ni BREAKING CHANGE.
+# ============================================================================
+name: Release
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: release
+  cancel-in-progress: false
+
+jobs:
+  release:
+    name: Calcular versión y publicar
+    if: ${{ false && github.event_name == 'push' }}
+    runs-on: ubuntu-latest
+    outputs:
+      new_release_published: ${{ steps.semrel.outputs.new_release_published }}
+      new_release_version: ${{ steps.semrel.outputs.new_release_version }}
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+      - uses: actions/setup-node@v7
+        with:
+          node-version: lts/*
+          cache: npm
+      - run: npm ci
+      - name: semantic-release
+        id: semrel
+        uses: cycjimmy/semantic-release-action@v4
+        with:
+          semantic_version: 24
+          extra_plugins: |
+            @semantic-release/changelog
+            @semantic-release/git
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+  apk:
+    name: APK firmado
+    needs: release
+    if: ${{ false && needs.release.outputs.new_release_published == 'true' }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 40
+    env:
+      VERSION: ${{ needs.release.outputs.new_release_version }}
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          ref: v${{ needs.release.outputs.new_release_version }}
+      - uses: actions/setup-java@v5
+        with:
+          distribution: temurin
+          java-version: 17
+      - uses: gradle/actions/setup-gradle@v6
+      - name: Restaurar el keystore
+        env:
+          KEYSTORE_B64: ${{ secrets.ANDROID_KEYSTORE_B64 }}
+        run: echo "$KEYSTORE_B64" | base64 -d > "${{ runner.temp }}/mi-plata-nativa.jks"
+      - name: Compilar el APK de release
+        env:
+          MIPLATA_KEYSTORE_PATH: ${{ runner.temp }}/mi-plata-nativa.jks
+          MIPLATA_KEYSTORE_PASSWORD: ${{ secrets.ANDROID_KEYSTORE_PASSWORD }}
+          MIPLATA_KEY_ALIAS: ${{ secrets.ANDROID_KEY_ALIAS }}
+          MIPLATA_KEY_PASSWORD: ${{ secrets.ANDROID_KEY_PASSWORD }}
+        run: |
+          chmod +x gradlew
+          ./gradlew assembleRelease -PappVersion="$VERSION" --no-daemon --console=plain
+      - name: Renombrar
+        run: |
+          mkdir -p dist
+          cp app/build/outputs/apk/release/app-release.apk "dist/mi-plata-nativa-v${VERSION}.apk"
+      - uses: actions/upload-artifact@v7
+        with:
+          name: mi-plata-nativa-v${{ env.VERSION }}
+          path: dist/*.apk
+          if-no-files-found: error
+      - name: Adjuntar el APK al Release
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: gh release upload "v${VERSION}" "dist/mi-plata-nativa-v${VERSION}.apk" --clobber --repo "${{ github.repository }}"

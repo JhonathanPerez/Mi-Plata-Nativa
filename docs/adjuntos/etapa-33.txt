@@ -1,0 +1,11 @@
+# Archivos del repo HÍBRIDO que se adjuntan en esta etapa (rutas relativas a la raíz del híbrido).
+# Los arma Armar-Adjunto.ps1. Una línea por archivo.
+native/android/AppUpdatePlugin.java
+native/android/UpdateFileProvider.java
+native/android/res/update_paths.xml
+src/lib/appUpdate.ts
+src/lib/appUpdate.test.ts
+src/lib/updateBridge.ts
+src/services/updateService.ts
+src/app/providers/UpdateProvider.tsx
+src/components/update/UpdateDialog.tsx

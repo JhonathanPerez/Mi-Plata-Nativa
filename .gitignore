@@ -1,0 +1,34 @@
+# Gradle / Android
+.gradle/
+build/
+!build-logic/
+local.properties
+*.apk
+*.aab
+captures/
+.cxx/
+.kotlin/
+
+# Android Studio
+.idea/
+*.iml
+
+# Secretos: NUNCA al repo
+*.jks
+*.keystore
+keystore.properties
+*.p12
+.env
+.env.local
+
+# Node (solo herramientas de commits y release)
+node_modules/
+
+# Adjuntos del híbrido: viven FUERA del repo; si alguna vez caen aquí, no se versionan
+adjunto-etapa-*
+_hibrido/
+hibrido/
+
+# Windows
+Thumbs.db
+.DS_Store

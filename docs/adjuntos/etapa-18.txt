@@ -1,0 +1,10 @@
+# Archivos del repo HÍBRIDO que se adjuntan en esta etapa (rutas relativas a la raíz del híbrido).
+# Los arma Armar-Adjunto.ps1. Una línea por archivo.
+src/pages/ExpenseFormPage.tsx
+src/components/ui/DateField.tsx
+src/components/ui/PickerField.tsx
+src/components/expenses/OptionSheet.tsx
+src/components/ui/ItemPreview.tsx
+src/components/ui/EmojiTile.tsx
+src/components/cards/ReminderPrompt.tsx
+src/styles/components/pickers.css
