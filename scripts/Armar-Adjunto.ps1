@@ -18,7 +18,7 @@ if ($salidaFull.StartsWith(([IO.Path]::GetFullPath($raiz).TrimEnd('\') + '\'), [
 $nn = '{0:D2}' -f $Etapa
 $lista = Join-Path $raiz "docs/adjuntos/etapa-$nn.txt"
 if (-not (Test-Path $lista)) { throw "No existe $lista" }
-$archivos = Get-Content $lista -Encoding UTF8 | Where-Object { $_.Trim() -ne '' -and -not $_.StartsWith('#') } | ForEach-Object { $_.Trim() }
+$archivos = @(Get-Content $lista -Encoding UTF8 | Where-Object { $_.Trim() -ne '' -and -not $_.StartsWith('#') } | ForEach-Object { $_.Trim() })
 if ($archivos.Count -gt 0) {
   if (-not $Hibrido -or -not (Test-Path $Hibrido)) { throw 'Indica la carpeta del repo híbrido con -Hibrido "C:\ruta\Mi-Plata-App" (o la variable MIPLATA_HIBRIDO).' }
 }
