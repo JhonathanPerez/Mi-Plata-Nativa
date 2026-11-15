@@ -1,0 +1,20 @@
+{
+  "name": "mi-plata-nativa",
+  "private": true,
+  "type": "module",
+  "version": "0.0.0-development",
+  "description": "Herramientas de commits y publicación de Mi Plata Nativa (la app es Kotlin; Node solo se usa para commitlint y semantic-release).",
+  "scripts": {
+    "prepare": "husky",
+    "semantic-release": "semantic-release"
+  },
+  "devDependencies": {
+    "@commitlint/cli": "^19.8.1",
+    "@commitlint/config-conventional": "^19.8.1",
+    "@semantic-release/changelog": "^6.0.3",
+    "@semantic-release/exec": "^6.0.3",
+    "@semantic-release/git": "^10.0.1",
+    "husky": "^9.1.7",
+    "semantic-release": "^24.2.0"
+  }
+}

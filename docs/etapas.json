@@ -1,0 +1,1310 @@
+[
+ {
+  "n": 0,
+  "nn": "00",
+  "branch": "chore/repo-kit-inicial",
+  "title": "chore(repo): agrega el kit de trabajo y deja el repositorio listo",
+  "commits": [
+   "chore(repo): agrega el kit de trabajo del proyecto"
+  ],
+  "adj": [],
+  "size": "S",
+  "kb": 0,
+  "tokens_aprox": 0,
+  "ask": false,
+  "cubre": [],
+  "entrega": "Copiar el kit al repo nuevo, crear el repo público en GitHub y dejar el CI corriendo. Sin código Kotlin.",
+  "manual": "Crear la carpeta del repo, correr Crear-Repo.ps1, crear la rama y el commit (ver GUIA-WINDOWS).",
+  "hito": "hito-etapa-00",
+  "zip": "etapa-00-kit-inicial.zip"
+ },
+ {
+  "n": 1,
+  "nn": "01",
+  "branch": "build/gradle-esqueleto-multimodulo",
+  "title": "build(gradle): crea el esqueleto multimódulo con identificadores propios",
+  "commits": [
+   "build(gradle): crea el esqueleto multimódulo y el catálogo de versiones",
+   "build(app): define applicationId propio, sufijo debug y versionado por fórmula"
+  ],
+  "adj": [
+   "capacitor.config.ts"
+  ],
+  "size": "S",
+  "kb": 0,
+  "tokens_aprox": 111,
+  "ask": false,
+  "cubre": [],
+  "entrega": "settings.gradle.kts, catálogo libs.versions.toml (con las versiones de docs/VERSIONES.md y las que arroje Verificar-Versiones.ps1), módulos vacíos, :app con Hilt y una pantalla 'Hola', FileProvider con ${applicationId}, CI verde.",
+  "manual": "Correr Verificar-Versiones.ps1 y pegarle la salida a la IA; correr Crear-GradleWrapper.ps1; abrir en Android Studio y probar en el teléfono.",
+  "hito": "hito-etapa-01",
+  "zip": "etapa-01-esqueleto-multimodulo.zip"
+ },
+ {
+  "n": 2,
+  "nn": "02",
+  "branch": "feat/dominio-dinero-fechas-texto",
+  "title": "feat(dominio): agrega las reglas de dinero, fechas y texto",
+  "commits": [
+   "test(dominio): porta las pruebas de dinero, fechas y texto",
+   "feat(dominio): implementa dinero, fechas y texto en :core:domain"
+  ],
+  "adj": [
+   "src/lib/money.ts",
+   "src/lib/money.test.ts",
+   "src/lib/dates.ts",
+   "src/lib/dates.test.ts",
+   "src/lib/text.ts",
+   "src/lib/text.test.ts",
+   "src/lib/ids.ts",
+   "src/lib/errors.ts",
+   "src/config/constants.ts"
+  ],
+  "size": "S",
+  "kb": 25,
+  "tokens_aprox": 7246,
+  "ask": true,
+  "cubre": [
+   "Dinero: pesos enteros sin decimales, máximo 999.999.999.999 y formato colombiano.",
+   "Fechas: día calendario local (AAAA-MM-DD) y mes (AAAA-MM); validación de fechas y horas.",
+   "Textos: nombre máx. 30, nota 200 y observaciones 500 caracteres."
+  ],
+  "entrega": "Funciones puras en :core:domain con todas las pruebas portadas.",
+  "manual": "",
+  "hito": "hito-etapa-02",
+  "zip": "etapa-02-dinero-fechas-texto.zip"
+ },
+ {
+  "n": 3,
+  "nn": "03",
+  "branch": "feat/dominio-ciclos-de-tarjeta",
+  "title": "feat(dominio): agrega las reglas de ciclo y pago de tarjetas",
+  "commits": [
+   "test(dominio): porta las pruebas de ciclos y vencimientos de tarjeta",
+   "feat(dominio): implementa ciclos de corte y pago de tarjetas"
+  ],
+  "adj": [
+   "src/lib/cycles.ts",
+   "src/lib/cycles.test.ts",
+   "src/lib/cardDue.ts",
+   "src/lib/cardDue.test.ts",
+   "src/lib/dates.ts"
+  ],
+  "size": "S",
+  "kb": 27,
+  "tokens_aprox": 7906,
+  "ask": true,
+  "cubre": [
+   "Corte y pago configurables: último día, día fijo o n-ésimo día de la semana.",
+   "El pago puede caer el mes siguiente y el fin de semana se mantiene o se corre.",
+   "Resumen de lo que vence y cuándo (cardDue)."
+  ],
+  "entrega": "Reglas de CycleRules y vencimientos, puras y probadas.",
+  "manual": "",
+  "hito": "hito-etapa-03",
+  "zip": "etapa-03-ciclos-de-tarjeta.zip"
+ },
+ {
+  "n": 4,
+  "nn": "04",
+  "branch": "feat/dominio-extractos-y-pagos",
+  "title": "feat(dominio): agrega las reglas de extractos, estados de pago y color de tarjeta",
+  "commits": [
+   "test(dominio): porta las pruebas de extractos y pagos",
+   "feat(dominio): implementa extractos, estado de extracto, textos y pagos"
+  ],
+  "adj": [
+   "src/lib/statements.ts",
+   "src/lib/statements.test.ts",
+   "src/lib/statementStatus.ts",
+   "src/lib/statementStatus.test.ts",
+   "src/lib/statementText.ts",
+   "src/lib/statementText.test.ts",
+   "src/lib/cardColor.ts",
+   "src/lib/cardColor.test.ts",
+   "src/lib/payment.ts",
+   "src/lib/payment.test.ts",
+   "src/lib/cycles.ts",
+   "src/lib/dates.ts"
+  ],
+  "size": "S",
+  "kb": 41,
+  "tokens_aprox": 12021,
+  "ask": true,
+  "cubre": [
+   "Fechas de corte y pago guardadas por periodo para cada tarjeta.",
+   "Estado del extracto y su texto explicativo.",
+   "Pagado / por pagar de cada gasto.",
+   "Color de cada tarjeta según su configuración."
+  ],
+  "entrega": "Reglas puras de extractos y pagos con pruebas.",
+  "manual": "",
+  "hito": "hito-etapa-04",
+  "zip": "etapa-04-extractos-y-pagos.zip"
+ },
+ {
+  "n": 5,
+  "nn": "05",
+  "branch": "feat/dominio-ahorros-y-comparativos",
+  "title": "feat(dominio): agrega las reglas de ahorros, comparativos y serie diaria",
+  "commits": [
+   "test(dominio): porta las pruebas de ahorros y comparativos",
+   "feat(dominio): implementa saldos de ahorro, comparativos y serie diaria"
+  ],
+  "adj": [
+   "src/lib/savings.ts",
+   "src/lib/savings.test.ts",
+   "src/lib/comparison.ts",
+   "src/lib/comparison.test.ts",
+   "src/lib/dailyChart.ts",
+   "src/lib/dailyChart.test.ts",
+   "src/lib/historyLink.ts",
+   "src/lib/historyLink.test.ts",
+   "src/lib/money.ts"
+  ],
+  "size": "S",
+  "kb": 33,
+  "tokens_aprox": 9561,
+  "ask": true,
+  "cubre": [
+   "Un retiro no puede superar el saldo; un movimiento manual se borra solo si el saldo no queda negativo.",
+   "Ajustar saldo crea el ingreso o retiro por la diferencia ('Ajuste de saldo').",
+   "Ahorro neto del mes = metiste − sacaste − pagado con ahorro.",
+   "Comparativo entre periodos y serie diaria para los gráficos."
+  ],
+  "entrega": "Reglas puras de ahorros y comparativos con pruebas.",
+  "manual": "",
+  "hito": "hito-etapa-05",
+  "zip": "etapa-05-ahorros-y-comparativos.zip"
+ },
+ {
+  "n": 6,
+  "nn": "06",
+  "branch": "feat/captura-lectura-de-notificaciones",
+  "title": "feat(captura): agrega el lector de montos y comercios de notificaciones bancarias",
+  "commits": [
+   "test(captura): porta las pruebas del lector de notificaciones",
+   "feat(captura): implementa un único lector de notificaciones en :core:domain"
+  ],
+  "adj": [
+   "src/lib/parseNotification.ts",
+   "src/lib/parseNotification.test.ts",
+   "src/config/capture.ts",
+   "native/android/ExpenseTextParser.java"
+  ],
+  "size": "M",
+  "kb": 50,
+  "tokens_aprox": 14659,
+  "ask": true,
+  "cubre": [
+   "Detecta monto en pesos, banco, comercio y últimos 4 dígitos de mensajes del banco.",
+   "Ignora mensajes sin monto o que parecen publicidad.",
+   "Hoy hay DOS lectores (TypeScript y Java) que hay que mantener iguales; en la nativa habrá uno solo.",
+   "'Pegar un mensaje' explica por qué no se detecta uno real."
+  ],
+  "entrega": "Un parser Kotlin único; las pruebas de ambos lectores quedan juntas.",
+  "manual": "",
+  "hito": "hito-etapa-06",
+  "zip": "etapa-06-lectura-de-notificaciones.zip"
+ },
+ {
+  "n": 7,
+  "nn": "07",
+  "branch": "feat/captura-aprendizaje-y-recordatorios",
+  "title": "feat(captura): agrega las reglas de spam aprendido y de recordatorios",
+  "commits": [
+   "test(captura): porta las pruebas de spam, textos y recordatorios",
+   "feat(captura): implementa spam aprendido, textos y reglas de recordatorios"
+  ],
+  "adj": [
+   "src/lib/spamLearning.ts",
+   "src/lib/spamLearning.test.ts",
+   "src/lib/captureCopy.ts",
+   "src/lib/captureCopy.test.ts",
+   "src/lib/pendingReminders.ts",
+   "src/lib/pendingReminders.test.ts",
+   "src/lib/reminders.ts",
+   "src/lib/reminders.test.ts",
+   "src/lib/dates.ts"
+  ],
+  "size": "S",
+  "kb": 37,
+  "tokens_aprox": 10891,
+  "ask": true,
+  "cubre": [
+   "Marcar spam enseña frases que luego se descartan solas.",
+   "Textos de ayuda de la captura.",
+   "Recordatorio de pendientes repetido cada N minutos si no abres la app.",
+   "Aviso de pago con N días de anticipación y a una hora elegida."
+  ],
+  "entrega": "Reglas puras con pruebas.",
+  "manual": "",
+  "hito": "hito-etapa-07",
+  "zip": "etapa-07-aprendizaje-y-recordatorios.zip"
+ },
+ {
+  "n": 8,
+  "nn": "08",
+  "branch": "feat/copias-formato-y-cifrado",
+  "title": "feat(copias): agrega el formato de copias de seguridad y su cifrado",
+  "commits": [
+   "test(copias): porta las pruebas de formato, volcado crudo y cifrado",
+   "feat(copias): implementa lectura, validación y cifrado AES-GCM de copias"
+  ],
+  "adj": [
+   "src/lib/backupCrypto.ts",
+   "src/lib/backupCrypto.test.ts",
+   "src/lib/rawDump.ts",
+   "src/lib/rawDump.test.ts",
+   "src/services/backupService.ts",
+   "src/services/importParse.test.ts",
+   "src/types/models.ts",
+   "src/config/constants.ts",
+   "native/android/BackupCrypto.java",
+   "native/android/Pbkdf2.java",
+   "src/lib/cycles.ts"
+  ],
+  "size": "M",
+  "kb": 51,
+  "tokens_aprox": 14843,
+  "ask": false,
+  "cubre": [],
+  "entrega": "Modelos de BackupFile v1–3, lector/validador, soporte del sobre cifrado (mi-plata-backup-encrypted) y del volcado crudo (mi-plata-raw-dump), con pruebas.",
+  "manual": "",
+  "hito": "hito-etapa-08",
+  "zip": "etapa-08-formato-y-cifrado.zip"
+ },
+ {
+  "n": 9,
+  "nn": "09",
+  "branch": "feat/datos-room-esquema",
+  "title": "feat(datos): agrega la base de datos Room con el esquema final",
+  "commits": [
+   "test(datos): porta las pruebas de esquema y semillas",
+   "feat(datos): crea la base Room con entidades, DAO y semillas"
+  ],
+  "adj": [
+   "src/db/migrations/001_init.ts",
+   "src/db/migrations/002_transferencia.ts",
+   "src/db/migrations/003_pending_captures.ts",
+   "src/db/migrations/004_paid_status_and_cycles.ts",
+   "src/db/migrations/005_spam_learning.ts",
+   "src/db/migrations/006_savings_accounts.ts",
+   "src/db/migrations/007_savings_account_last4.ts",
+   "src/db/migrations/008_expense_observations.ts",
+   "src/db/migrations/migrations.test.ts",
+   "src/db/mappers.ts",
+   "src/db/types.ts",
+   "src/db/seed.ts",
+   "src/config/seeds.ts",
+   "src/repositories/backupRepository.ts"
+  ],
+  "size": "S",
+  "kb": 38,
+  "tokens_aprox": 11123,
+  "ask": false,
+  "cubre": [],
+  "entrega": "Room (esquema v1 con el estado final del híbrido: sin migrar las 8 migraciones), exportSchema, DAO, TypeConverters y semillas (solo Efectivo y Transferencia).",
+  "manual": "",
+  "hito": "hito-etapa-09",
+  "zip": "etapa-09-room-esquema.zip"
+ },
+ {
+  "n": 10,
+  "nn": "10",
+  "branch": "feat/datos-gastos-y-categorias",
+  "title": "feat(datos): agrega los repositorios y reglas de gastos, categorías y presupuesto",
+  "commits": [
+   "test(datos): porta las pruebas de gastos, categorías y presupuesto",
+   "feat(datos): implementa repositorios y casos de uso de gastos, categorías y presupuesto"
+  ],
+  "adj": [
+   "src/repositories/expenseRepository.ts",
+   "src/repositories/categoryRepository.ts",
+   "src/repositories/budgetRepository.ts",
+   "src/services/expenseService.ts",
+   "src/services/categoryService.ts",
+   "src/services/budgetService.ts",
+   "src/services/services.test.ts",
+   "src/test/fixtures.ts"
+  ],
+  "size": "M",
+  "kb": 49,
+  "tokens_aprox": 14210,
+  "ask": true,
+  "cubre": [
+   "Un gasto exige monto > 0, categoría y método; fecha obligatoria y hora opcional.",
+   "Nota (200) y observaciones (500) opcionales.",
+   "El nombre de una categoría es único sin distinguir mayúsculas; una categoría con gastos no se elimina, se oculta.",
+   "Presupuesto por mes."
+  ],
+  "entrega": "Repositorios Room + casos de uso + pruebas de integración.",
+  "manual": "",
+  "hito": "hito-etapa-10",
+  "zip": "etapa-10-gastos-y-categorias.zip"
+ },
+ {
+  "n": 11,
+  "nn": "11",
+  "branch": "feat/datos-metodos-de-pago-y-tarjetas",
+  "title": "feat(datos): agrega métodos de pago, tarjetas y extractos",
+  "commits": [
+   "test(datos): porta las pruebas de métodos de pago y tarjetas",
+   "feat(datos): implementa métodos de pago, ciclos y extractos de tarjeta"
+  ],
+  "adj": [
+   "src/repositories/paymentMethodRepository.ts",
+   "src/repositories/cardCycleRepository.ts",
+   "src/services/paymentMethodService.ts",
+   "src/services/cardService.ts",
+   "src/services/cardService.test.ts"
+  ],
+  "size": "S",
+  "kb": 39,
+  "tokens_aprox": 11390,
+  "ask": true,
+  "cubre": [
+   "Una instalación nueva solo trae Efectivo y Transferencia.",
+   "Un método con gastos no se elimina, se oculta; últimos 4 dígitos opcionales (nunca el número completo).",
+   "Tarjetas de crédito con reglas de corte y pago y extractos por periodo.",
+   "Los métodos 'espejo' de ahorros no aparecen en Métodos de pago."
+  ],
+  "entrega": "Repositorios y casos de uso de métodos/tarjetas con pruebas.",
+  "manual": "",
+  "hito": "hito-etapa-11",
+  "zip": "etapa-11-metodos-de-pago-y-tarjetas.zip"
+ },
+ {
+  "n": 12,
+  "nn": "12",
+  "branch": "feat/datos-cuentas-de-ahorro",
+  "title": "feat(datos): agrega cuentas de ahorro y sus movimientos",
+  "commits": [
+   "test(datos): porta las pruebas de cuentas de ahorro",
+   "feat(datos): implementa cuentas de ahorro, movimientos y método espejo"
+  ],
+  "adj": [
+   "src/repositories/savingsRepository.ts",
+   "src/services/savingsService.ts",
+   "src/services/savingsService.test.ts"
+  ],
+  "size": "S",
+  "kb": 38,
+  "tokens_aprox": 11061,
+  "ask": true,
+  "cubre": [
+   "Cada cuenta tiene nombre, últimos 4 (opcionales), icono y color.",
+   "Saldo inicial como primer movimiento; meter, sacar y ajustar saldo.",
+   "Pagar un gasto con una cuenta crea el retiro enlazado, atómico con el gasto.",
+   "Una cuenta que ya pagó gastos no se elimina; ocultarla la saca de la lista al pagar."
+  ],
+  "entrega": "Repositorio y servicio de ahorros con pruebas (incluye transacciones).",
+  "manual": "",
+  "hito": "hito-etapa-12",
+  "zip": "etapa-12-cuentas-de-ahorro.zip"
+ },
+ {
+  "n": 13,
+  "nn": "13",
+  "branch": "feat/captura-pendientes-y-ajustes",
+  "title": "feat(captura): agrega capturas pendientes, ajustes con DataStore y apps de captura",
+  "commits": [
+   "test(captura): porta las pruebas de capturas pendientes",
+   "feat(captura): implementa capturas pendientes, spam aprendido y ajustes en DataStore"
+  ],
+  "adj": [
+   "src/repositories/pendingCaptureRepository.ts",
+   "src/repositories/learnedSpamRepository.ts",
+   "src/repositories/settingsRepository.ts",
+   "src/services/captureService.ts",
+   "src/services/captureService.test.ts",
+   "src/services/captureSync.ts",
+   "src/services/captureAppsService.ts",
+   "src/services/spamLearningService.ts",
+   "src/services/settingsService.ts"
+  ],
+  "size": "S",
+  "kb": 27,
+  "tokens_aprox": 7809,
+  "ask": true,
+  "cubre": [
+   "Una compra detectada queda 'Por categorizar' con estados pendiente, aceptada, descartada o spam.",
+   "Evita duplicados con una huella del mensaje.",
+   "Sugiere cuenta/tarjeta solo por los últimos 4 dígitos.",
+   "El texto del mensaje se borra al categorizar o descartar."
+  ],
+  "entrega": "Casos de uso de captura y SettingsStore (DataStore).",
+  "manual": "",
+  "hito": "hito-etapa-13",
+  "zip": "etapa-13-pendientes-y-ajustes.zip"
+ },
+ {
+  "n": 14,
+  "nn": "14",
+  "branch": "feat/datos-estadisticas",
+  "title": "feat(datos): agrega las consultas de estadísticas",
+  "commits": [
+   "test(datos): porta las pruebas de estadísticas",
+   "feat(datos): implementa las consultas de estadísticas del mes"
+  ],
+  "adj": [
+   "src/services/statsService.ts",
+   "src/services/exportData.ts",
+   "src/lib/comparison.ts"
+  ],
+  "size": "S",
+  "kb": 13,
+  "tokens_aprox": 3849,
+  "ask": true,
+  "cubre": [
+   "Total gastado del mes, por categoría, por método de pago y por día.",
+   "Sección de ahorros que sigue al mes elegido.",
+   "Comparación contra el mes anterior."
+  ],
+  "entrega": "StatsRepository con consultas Room y pruebas.",
+  "manual": "",
+  "hito": "hito-etapa-14",
+  "zip": "etapa-14-estadisticas.zip"
+ },
+ {
+  "n": 15,
+  "nn": "15",
+  "branch": "feat/ui-sistema-de-diseno",
+  "title": "feat(ui): agrega el tema, los colores, las fuentes y los componentes base",
+  "commits": [
+   "feat(ui): crea el tema Material 3 con colores, formas y tipografía",
+   "feat(ui): agrega los componentes base del sistema de diseño"
+  ],
+  "adj": [
+   "src/styles/tokens.css",
+   "src/styles/base.css",
+   "src/styles/tokens.test.ts",
+   "src/styles/components/buttons.css",
+   "src/styles/components/controls.css",
+   "src/styles/components/forms.css",
+   "src/styles/components/rows.css",
+   "src/styles/components/feedback.css",
+   "src/styles/components/overlays.css",
+   "src/components/ui/Button.tsx",
+   "src/components/ui/Chip.tsx",
+   "src/components/ui/Field.tsx",
+   "src/components/ui/Money.tsx",
+   "src/components/ui/MoneyInput.tsx",
+   "src/components/ui/Sheet.tsx",
+   "src/components/ui/Toggle.tsx",
+   "src/components/ui/Segmented.tsx",
+   "src/components/ui/Row.tsx",
+   "src/components/ui/EmptyState.tsx",
+   "src/components/ui/ErrorState.tsx",
+   "src/components/ui/Skeleton.tsx",
+   "src/components/ui/Notice.tsx",
+   "src/components/ui/PageHeader.tsx",
+   "src/components/ui/Stat.tsx"
+  ],
+  "size": "M",
+  "kb": 69,
+  "tokens_aprox": 20275,
+  "ask": true,
+  "cubre": [
+   "Verde de marca #0B7A63; paleta de 12 colores para categorías.",
+   "Fuentes Bricolage Grotesque (títulos) y Figtree (texto).",
+   "Tema claro, oscuro o del sistema.",
+   "Botones, chips, hojas inferiores, filas, estados vacíos, de error y de carga."
+  ],
+  "entrega": "Módulo :core:designsystem con tema y componentes; las fuentes las baja Descargar-Fuentes.ps1.",
+  "manual": "",
+  "hito": "hito-etapa-15",
+  "zip": "etapa-15-sistema-de-diseno.zip"
+ },
+ {
+  "n": 16,
+  "nn": "16",
+  "branch": "feat/navegacion-arranque-y-barra-inferior",
+  "title": "feat(navegacion): agrega la navegación, la barra inferior y la pantalla de arranque",
+  "commits": [
+   "test(navegacion): porta las pruebas de navegación y botón atrás",
+   "feat(navegacion): crea el grafo de navegación, barra inferior y pantalla de arranque"
+  ],
+  "adj": [
+   "src/app/App.tsx",
+   "src/app/AppShell.tsx",
+   "src/app/BottomNav.tsx",
+   "src/app/DatabaseGate.tsx",
+   "src/app/BackButtonHandler.tsx",
+   "src/lib/backNavigation.ts",
+   "src/lib/backNavigation.test.ts",
+   "src/lib/navigationState.ts",
+   "src/lib/navigationState.test.ts",
+   "src/lib/backStack.ts",
+   "src/components/ui/SplashLoading.tsx",
+   "src/components/ui/RingLogo.tsx",
+   "src/components/ui/PageTransition.tsx",
+   "src/styles/components/splash.css",
+   "src/config/constants.ts"
+  ],
+  "size": "S",
+  "kb": 33,
+  "tokens_aprox": 9763,
+  "ask": true,
+  "cubre": [
+   "Barra inferior con las secciones principales.",
+   "Pantalla de arranque mínima de 1,2 s con el logo de anillo de 5 tramos.",
+   "El botón atrás vuelve donde estabas y conserva la posición de la lista."
+  ],
+  "entrega": "Navigation Compose con rutas tipadas, shell y splash.",
+  "manual": "",
+  "hito": "hito-etapa-16",
+  "zip": "etapa-16-arranque-y-barra-inferior.zip"
+ },
+ {
+  "n": 17,
+  "nn": "17",
+  "branch": "feat/importacion-desde-el-hibrido",
+  "title": "feat(importacion): agrega la importación guiada desde el híbrido",
+  "commits": [
+   "test(importacion): agrega pruebas del resumen, la transacción única y la verificación",
+   "feat(importacion): agrega la pantalla guiada de importación desde Mi Plata híbrida",
+   "feat(importacion): avisa que la captura y los recordatorios deben estar en una sola app"
+  ],
+  "adj": [
+   "src/services/backupService.ts",
+   "src/lib/backupCrypto.ts",
+   "src/lib/rawDump.ts",
+   "src/components/backup/BackupPasswordSheet.tsx",
+   "src/lib/fileIO.ts",
+   "src/pages/SettingsPage.tsx"
+  ],
+  "size": "S",
+  "kb": 38,
+  "tokens_aprox": 11235,
+  "ask": true,
+  "cubre": [
+   "Hoy 'Restaurar' REEMPLAZA todos los datos de la app.",
+   "Las copias cifradas piden la contraseña (mínimo 8 caracteres).",
+   "Acepta copias v1 a v3 y volcados crudos de la tarea en segundo plano.",
+   "En la nativa: leer el JSON, mostrar resumen (cantidades y totales), confirmar, importar en UNA transacción, verificar, sin borrar nada."
+  ],
+  "entrega": "Pantalla guiada completa y aviso de convivencia en la app. Prueba con tu copia real.",
+  "manual": "",
+  "hito": "hito-etapa-17",
+  "zip": "etapa-17-desde-el-hibrido.zip"
+ },
+ {
+  "n": 18,
+  "nn": "18",
+  "branch": "feat/gastos-registrar-y-editar",
+  "title": "feat(gastos): agrega el formulario para registrar y editar gastos",
+  "commits": [
+   "feat(gastos): agrega el formulario de gasto con monto, categoría, método y fecha",
+   "feat(gastos): agrega observaciones, hora y recuerdo del último método"
+  ],
+  "adj": [
+   "src/pages/ExpenseFormPage.tsx",
+   "src/components/ui/DateField.tsx",
+   "src/components/ui/PickerField.tsx",
+   "src/components/expenses/OptionSheet.tsx",
+   "src/components/ui/ItemPreview.tsx",
+   "src/components/ui/EmojiTile.tsx",
+   "src/components/cards/ReminderPrompt.tsx",
+   "src/styles/components/pickers.css"
+  ],
+  "size": "S",
+  "kb": 31,
+  "tokens_aprox": 9007,
+  "ask": true,
+  "cubre": [
+   "Monto, categoría, método de pago, fecha (hoy por defecto), hora, nota y observaciones.",
+   "Recuerda el último método de pago usado.",
+   "Con una cuenta de ahorro, muestra su saldo en el método de pago.",
+   "Edición del mismo formulario."
+  ],
+  "entrega": "Pantalla de registro/edición con ViewModel y estado unidireccional.",
+  "manual": "",
+  "hito": "hito-etapa-18",
+  "zip": "etapa-18-registrar-y-editar.zip"
+ },
+ {
+  "n": 19,
+  "nn": "19",
+  "branch": "feat/gastos-lista-y-detalle",
+  "title": "feat(gastos): agrega la lista de gastos y el detalle en forma de recibo",
+  "commits": [
+   "feat(gastos): agrega la lista de gastos con deslizar y pulsación larga",
+   "feat(gastos): agrega el detalle en forma de recibo con editar y eliminar"
+  ],
+  "adj": [
+   "src/pages/ExpenseDetailPage.tsx",
+   "src/components/expenses/ExpenseList.tsx",
+   "src/components/expenses/ExpenseRow.tsx",
+   "src/components/expenses/ExpenseListSkeleton.tsx",
+   "src/components/ui/SwipeRow.tsx",
+   "src/hooks/useLongPress.ts",
+   "src/hooks/useSwipeHint.ts",
+   "src/components/ui/ActionSheet.tsx",
+   "src/app/providers/ConfirmProvider.tsx",
+   "src/app/providers/ToastProvider.tsx",
+   "src/styles/components/expenses.css"
+  ],
+  "size": "S",
+  "kb": 36,
+  "tokens_aprox": 10627,
+  "ask": true,
+  "cubre": [
+   "Lista de gastos por día con deslizar y pulsación larga.",
+   "Detalle como recibo con acciones Editar y Eliminar (v1.4.0).",
+   "Confirmación antes de eliminar y avisos tipo 'toast'.",
+   "Pista visual la primera vez que se puede deslizar."
+  ],
+  "entrega": "Lista y detalle con acciones.",
+  "manual": "",
+  "hito": "hito-etapa-19",
+  "zip": "etapa-19-lista-y-detalle.zip"
+ },
+ {
+  "n": 20,
+  "nn": "20",
+  "branch": "feat/historial-filtros-y-meses",
+  "title": "feat(historial): agrega el historial con filtros y navegador de meses",
+  "commits": [
+   "feat(historial): agrega el historial por mes con navegador de meses",
+   "feat(historial): agrega la hoja de filtros"
+  ],
+  "adj": [
+   "src/pages/HistoryPage.tsx",
+   "src/components/expenses/FilterSheet.tsx",
+   "src/components/ui/MonthNavigator.tsx",
+   "src/lib/historyLink.ts",
+   "src/hooks/useScrollRestoration.ts",
+   "src/hooks/useHideOnScroll.ts",
+   "src/hooks/useDebounced.ts"
+  ],
+  "size": "S",
+  "kb": 20,
+  "tokens_aprox": 5908,
+  "ask": true,
+  "cubre": [
+   "Historial por mes con navegador de meses.",
+   "Hoja de filtros sobre los gastos.",
+   "Enlaces desde otras pantallas que abren el historial ya filtrado.",
+   "Conserva la posición al volver."
+  ],
+  "entrega": "Pantalla de historial con filtros.",
+  "manual": "",
+  "hito": "hito-etapa-20",
+  "zip": "etapa-20-filtros-y-meses.zip"
+ },
+ {
+  "n": 21,
+  "nn": "21",
+  "branch": "feat/inicio-resumen-y-presupuesto",
+  "title": "feat(inicio): agrega la pantalla de inicio con presupuesto y modo privacidad",
+  "commits": [
+   "feat(inicio): agrega el resumen del mes y la franja de presupuesto",
+   "feat(inicio): agrega la tarjeta de vencimientos y el modo privacidad"
+  ],
+  "adj": [
+   "src/pages/HomePage.tsx",
+   "src/components/expenses/BudgetSheet.tsx",
+   "src/components/charts/BudgetStrip.tsx",
+   "src/components/cards/DueSummaryCard.tsx",
+   "src/app/providers/PrivacyProvider.tsx",
+   "src/components/ui/PrivacyToggle.tsx",
+   "src/styles/components/privacy.css"
+  ],
+  "size": "S",
+  "kb": 22,
+  "tokens_aprox": 6578,
+  "ask": true,
+  "cubre": [
+   "Resumen del mes y presupuesto editable.",
+   "Tarjeta de lo que vence de las tarjetas de crédito.",
+   "Tarjeta de cuentas de ahorro.",
+   "Modo privacidad que oculta todos los valores."
+  ],
+  "entrega": "Inicio completo con modo privacidad.",
+  "manual": "",
+  "hito": "hito-etapa-21",
+  "zip": "etapa-21-resumen-y-presupuesto.zip"
+ },
+ {
+  "n": 22,
+  "nn": "22",
+  "branch": "feat/estadisticas-graficos",
+  "title": "feat(estadisticas): agrega los gráficos de estadísticas",
+  "commits": [
+   "feat(estadisticas): agrega la dona y las barras por categoría y por día",
+   "feat(estadisticas): agrega los gráficos por método y de ahorros"
+  ],
+  "adj": [
+   "src/components/charts/CategoryBars.tsx",
+   "src/components/charts/DailyBars.tsx",
+   "src/components/charts/DonutChart.tsx",
+   "src/components/charts/MethodSingle.tsx",
+   "src/components/charts/SavingsBars.tsx",
+   "src/components/charts/StatsSkeleton.tsx",
+   "src/styles/components/charts.css",
+   "src/pages/StatsPage.tsx"
+  ],
+  "size": "S",
+  "kb": 32,
+  "tokens_aprox": 9331,
+  "ask": true,
+  "cubre": [
+   "Dona y barras por categoría.",
+   "Barras por día del mes.",
+   "Reparto por método de pago.",
+   "Sección de ahorros del mes."
+  ],
+  "entrega": "Gráficos dibujados con Canvas de Compose, sin librerías de gráficos.",
+  "manual": "",
+  "hito": "hito-etapa-22",
+  "zip": "etapa-22-graficos.zip"
+ },
+ {
+  "n": 23,
+  "nn": "23",
+  "branch": "feat/catalogos-categorias-y-metodos",
+  "title": "feat(catalogos): agrega la gestión de categorías y métodos de pago",
+  "commits": [
+   "feat(catalogos): agrega la gestión de categorías",
+   "feat(catalogos): agrega la gestión de métodos de pago"
+  ],
+  "adj": [
+   "src/pages/CategoriesPage.tsx",
+   "src/pages/PaymentMethodsPage.tsx",
+   "src/components/ui/ManagedRow.tsx",
+   "src/components/ui/ManagedListSkeleton.tsx",
+   "src/components/ui/IconPicker.tsx",
+   "src/components/ui/ColorPicker.tsx",
+   "src/config/constants.ts"
+  ],
+  "size": "S",
+  "kb": 26,
+  "tokens_aprox": 7718,
+  "ask": true,
+  "cubre": [
+   "Crear y editar con icono (36 opciones) y color (12).",
+   "Interruptor 'Aparece al registrar un gasto' para ocultar.",
+   "Una categoría o método con gastos no se elimina.",
+   "Reordenar."
+  ],
+  "entrega": "Pantallas de catálogos.",
+  "manual": "",
+  "hito": "hito-etapa-23",
+  "zip": "etapa-23-categorias-y-metodos.zip"
+ },
+ {
+  "n": 24,
+  "nn": "24",
+  "branch": "feat/tarjetas-credito-y-extractos",
+  "title": "feat(tarjetas): agrega las pantallas de tarjetas de crédito, reglas y extractos",
+  "commits": [
+   "feat(tarjetas): agrega la lista de tarjetas y sus reglas de corte y pago",
+   "feat(tarjetas): agrega extractos y el pago de la tarjeta"
+  ],
+  "adj": [
+   "src/pages/CardsPage.tsx",
+   "src/pages/CardRulesPage.tsx",
+   "src/pages/StatementsPage.tsx",
+   "src/pages/PayCardPage.tsx",
+   "src/components/cards/CreditCardTile.tsx",
+   "src/components/cards/RuleSheet.tsx",
+   "src/components/cards/StatementDatesSheet.tsx",
+   "src/styles/features/credit-cards.css",
+   "src/styles/features/payments.css"
+  ],
+  "size": "M",
+  "kb": 67,
+  "tokens_aprox": 19673,
+  "ask": true,
+  "cubre": [
+   "Tarjeta con su color, cupo usado y próximas fechas.",
+   "Reglas de corte y pago editables.",
+   "Extractos por periodo con fechas ajustables.",
+   "Pagar la tarjeta marca como pagados sus gastos."
+  ],
+  "entrega": "Pantallas de tarjetas.",
+  "manual": "",
+  "hito": "hito-etapa-24",
+  "zip": "etapa-24-credito-y-extractos.zip"
+ },
+ {
+  "n": 25,
+  "nn": "25",
+  "branch": "feat/ahorros-cuentas-y-movimientos",
+  "title": "feat(ahorros): agrega las pantallas de cuentas de ahorro",
+  "commits": [
+   "feat(ahorros): agrega la lista de cuentas de ahorro",
+   "feat(ahorros): agrega el detalle, los movimientos y el ajuste de saldo"
+  ],
+  "adj": [
+   "src/pages/SavingsPage.tsx",
+   "src/pages/SavingsAccountPage.tsx",
+   "src/components/savings/SavingsAccountSheet.tsx",
+   "src/components/savings/SavingsAdjustSheet.tsx",
+   "src/components/savings/SavingsMovementSheet.tsx",
+   "src/styles/features/savings.css"
+  ],
+  "size": "S",
+  "kb": 26,
+  "tokens_aprox": 7701,
+  "ask": true,
+  "cubre": [
+   "Crear cuenta con nombre, últimos 4, icono y saldo inicial.",
+   "Meter y sacar plata; ajustar saldo con el del banco.",
+   "Detalle con cada movimiento y su saldo resultante.",
+   "Tocar un retiro enlazado abre el gasto."
+  ],
+  "entrega": "Pantallas de ahorros.",
+  "manual": "",
+  "hito": "hito-etapa-25",
+  "zip": "etapa-25-cuentas-y-movimientos.zip"
+ },
+ {
+  "n": 26,
+  "nn": "26",
+  "branch": "feat/excel-exportar-e-importar",
+  "title": "feat(excel): agrega la exportación e importación de Excel",
+  "commits": [
+   "test(excel): porta las pruebas de importación de Excel",
+   "feat(excel): agrega exportar e importar .xlsx sin librerías pesadas"
+  ],
+  "adj": [
+   "src/pages/ExportPage.tsx",
+   "src/services/excelWriter.ts",
+   "src/services/exportData.ts",
+   "src/services/exportService.ts",
+   "src/services/importService.ts",
+   "src/services/importParse.test.ts"
+  ],
+  "size": "S",
+  "kb": 28,
+  "tokens_aprox": 8325,
+  "ask": true,
+  "cubre": [
+   "Exporta los gastos a un archivo .xlsx.",
+   "Importa gastos desde .xlsx (nunca usa una cuenta de ahorro).",
+   "Valida filas y reporta errores.",
+   "Comparte el archivo con el menú de Android."
+  ],
+  "entrega": "Lector/escritor .xlsx propio (zip + XML), sin dependencias.",
+  "manual": "",
+  "hito": "hito-etapa-26",
+  "zip": "etapa-26-exportar-e-importar.zip"
+ },
+ {
+  "n": 27,
+  "nn": "27",
+  "branch": "feat/captura-servicio-de-notificaciones",
+  "title": "feat(captura): reescribe en Kotlin el lector de notificaciones",
+  "commits": [
+   "feat(captura): reescribe en Kotlin el servicio lector de notificaciones",
+   "feat(captura): agrega el guardado de capturas y el permiso de acceso"
+  ],
+  "adj": [
+   "native/android/CaptureListenerService.java",
+   "native/android/CaptureStore.java",
+   "native/android/NotificationCapturePlugin.java",
+   "src/lib/notificationCapture.ts",
+   "src/hooks/useCaptureAccess.ts",
+   "scripts/apply-android-native.mjs"
+  ],
+  "size": "M",
+  "kb": 49,
+  "tokens_aprox": 14398,
+  "ask": true,
+  "cubre": [
+   "Lee solo las apps elegidas; por defecto solo las de SMS.",
+   "Guarda únicamente mensajes con un monto en pesos.",
+   "No pide permiso de SMS (los lee como notificaciones).",
+   "Guía de 'ajustes restringidos' en Android 13+ y de batería en Xiaomi, Samsung, etc."
+  ],
+  "entrega": "NotificationListenerService en Kotlin con acción/permiso derivados de ${applicationId}.",
+  "manual": "",
+  "hito": "hito-etapa-27",
+  "zip": "etapa-27-servicio-de-notificaciones.zip"
+ },
+ {
+  "n": 28,
+  "nn": "28",
+  "branch": "feat/captura-por-categorizar",
+  "title": "feat(captura): agrega las pantallas de Por categorizar y de configuración de captura",
+  "commits": [
+   "feat(captura): agrega la pantalla Por categorizar",
+   "feat(captura): agrega la configuración y la elección de apps de captura"
+  ],
+  "adj": [
+   "src/pages/PendingPage.tsx",
+   "src/components/expenses/PendingRow.tsx",
+   "src/pages/CaptureSetupPage.tsx",
+   "src/pages/TrackedAppsPage.tsx",
+   "src/components/capture/CaptureAppsSheet.tsx",
+   "src/services/captureAppsService.ts"
+  ],
+  "size": "S",
+  "kb": 25,
+  "tokens_aprox": 7221,
+  "ask": true,
+  "cubre": [
+   "Por categorizar: eliges solo la categoría y el gasto queda registrado.",
+   "Descartar o marcar como spam.",
+   "Pegar un mensaje explica por qué se detecta o no.",
+   "Elegir las apps que se vigilan."
+  ],
+  "entrega": "Pantallas de captura con ViewModel.",
+  "manual": "",
+  "hito": "hito-etapa-28",
+  "zip": "etapa-28-por-categorizar.zip"
+ },
+ {
+  "n": 29,
+  "nn": "29",
+  "branch": "feat/recordatorios-avisos-de-pago-y-pendientes",
+  "title": "feat(recordatorios): reescribe en Kotlin los recordatorios con la app cerrada",
+  "commits": [
+   "feat(recordatorios): reescribe en Kotlin los avisos de pago y de pendientes",
+   "feat(recordatorios): agrega la pantalla de ajustes de recordatorios"
+  ],
+  "adj": [
+   "native/android/PendingReminderReceiver.java",
+   "native/android/res/ic_stat_miplata.xml",
+   "src/lib/localNotifications.ts",
+   "src/services/reminderService.ts",
+   "src/services/reminderService.test.ts",
+   "src/services/reminderSync.ts",
+   "src/app/ReminderSync.tsx",
+   "src/components/cards/ReminderSettingsCard.tsx",
+   "src/components/cards/PendingReminderCard.tsx",
+   "src/components/cards/useReminderStatus.ts",
+   "src/pages/PaymentRemindersPage.tsx",
+   "src/pages/PendingRemindersPage.tsx"
+  ],
+  "size": "M",
+  "kb": 54,
+  "tokens_aprox": 15794,
+  "ask": true,
+  "cubre": [
+   "Aviso de pago con N días de anticipación y hora elegida.",
+   "Aviso de pendientes repetido cada N minutos mientras no abras la app.",
+   "Pide permiso de notificaciones (Android 13+) y de alarmas exactas.",
+   "El aviso funciona con la app cerrada."
+  ],
+  "entrega": "WorkManager/AlarmManager en Kotlin, reprogramación al reiniciar el teléfono (defecto D-04).",
+  "manual": "",
+  "hito": "hito-etapa-29",
+  "zip": "etapa-29-avisos-de-pago-y-pendientes.zip"
+ },
+ {
+  "n": 30,
+  "nn": "30",
+  "branch": "feat/seguridad-bloqueo-biometrico",
+  "title": "feat(seguridad): agrega el bloqueo con huella, rostro o PIN",
+  "commits": [
+   "test(seguridad): porta las pruebas de la política de bloqueo",
+   "feat(seguridad): agrega el bloqueo biométrico y su pantalla de ajustes"
+  ],
+  "adj": [
+   "src/app/LockGate.tsx",
+   "src/lib/lockPolicy.ts",
+   "src/lib/lockPolicy.test.ts",
+   "src/services/lockService.ts",
+   "src/lib/biometrics.ts",
+   "src/pages/LockSettingsPage.tsx"
+  ],
+  "size": "S",
+  "kb": 16,
+  "tokens_aprox": 4603,
+  "ask": true,
+  "cubre": [
+   "Pide huella, rostro o PIN al abrir la app.",
+   "Tiempo de gracia configurable antes de volver a pedirlo.",
+   "Se activa o desactiva en Ajustes.",
+   "Oculta el contenido en la vista de apps recientes."
+  ],
+  "entrega": "BiometricPrompt con política de bloqueo probada.",
+  "manual": "",
+  "hito": "hito-etapa-30",
+  "zip": "etapa-30-bloqueo-biometrico.zip"
+ },
+ {
+  "n": 31,
+  "nn": "31",
+  "branch": "feat/copias-automaticas-programadas",
+  "title": "feat(copias): reescribe en Kotlin las copias automáticas programadas",
+  "commits": [
+   "test(copias): porta las pruebas de horarios y de copias automáticas",
+   "feat(copias): reescribe en Kotlin la programación de copias con WorkManager",
+   "feat(copias): guarda las copias locales y conserva solo las últimas 5"
+  ],
+  "adj": [
+   "native/android/BackupWorker.java",
+   "native/android/BackupScheduler.java",
+   "native/android/BackupScheduleStore.java",
+   "native/android/BackupTiming.java",
+   "native/android/BackupSchedulePlugin.java",
+   "native/android/BackupNames.java",
+   "native/android/RawDump.java",
+   "native/android/SqliteDumpSource.java",
+   "src/lib/autoBackup.ts",
+   "src/lib/autoBackup.test.ts",
+   "src/lib/backgroundBackup.ts",
+   "src/app/AutoBackupSync.tsx",
+   "src/services/autoBackupService.ts",
+   "src/services/autoBackupService.test.ts",
+   "src/lib/backupStore.ts"
+  ],
+  "size": "M",
+  "kb": 62,
+  "tokens_aprox": 18239,
+  "ask": true,
+  "cubre": [
+   "Copia por frecuencia y hora elegidas, aun con la app cerrada.",
+   "Se guardan localmente y se conservan las últimas 5.",
+   "Hoy la tarea en segundo plano escribe un 'volcado crudo' que luego se convierte; en la nativa usa Room y escribe la copia normal.",
+   "Primera copia no reemplaza copias buenas si la app está vacía."
+  ],
+  "entrega": "Worker en Kotlin que usa los casos de uso (defecto D-02).",
+  "manual": "",
+  "hito": "hito-etapa-31",
+  "zip": "etapa-31-automaticas-programadas.zip"
+ },
+ {
+  "n": 32,
+  "nn": "32",
+  "branch": "feat/copias-nube-cifrada",
+  "title": "feat(copias): agrega el envío de copias a la carpeta de la nube con cifrado",
+  "commits": [
+   "feat(copias): agrega la carpeta de la nube con el selector de documentos",
+   "feat(copias): cifra las copias y guarda la contraseña en el Keystore",
+   "feat(copias): agrega la pantalla de copias automáticas"
+  ],
+  "adj": [
+   "native/android/CloudFolderPlugin.java",
+   "native/android/CloudFolderStore.java",
+   "native/android/SecretStore.java",
+   "src/lib/cloudFolder.ts",
+   "src/lib/backupSecret.ts",
+   "src/services/cloudBackupService.ts",
+   "src/services/cloudBackupService.test.ts",
+   "src/pages/AutoBackupPage.tsx",
+   "src/components/backup/BackupPasswordSheet.tsx"
+  ],
+  "size": "M",
+  "kb": 49,
+  "tokens_aprox": 14242,
+  "ask": true,
+  "cubre": [
+   "Eliges una carpeta (de Drive, etc.) y las copias se envían solas.",
+   "Copias cifradas con contraseña de mínimo 8 caracteres (AES-256-GCM).",
+   "Si olvidas la contraseña no hay forma de recuperar la copia.",
+   "Muestra la hora del último envío y el motivo del último fallo."
+  ],
+  "entrega": "SAF + Keystore + cifrado, con pantalla de copias automáticas.",
+  "manual": "",
+  "hito": "hito-etapa-32",
+  "zip": "etapa-32-nube-cifrada.zip"
+ },
+ {
+  "n": 33,
+  "nn": "33",
+  "branch": "feat/actualizador-apk-desde-github",
+  "title": "feat(actualizador): reescribe en Kotlin el actualizador de APK con verificación de firma",
+  "commits": [
+   "test(actualizador): porta las pruebas de versiones y avisos",
+   "feat(actualizador): reescribe en Kotlin la consulta, la descarga y la verificación del APK",
+   "feat(actualizador): agrega el diálogo de actualización y el FileProvider propio"
+  ],
+  "adj": [
+   "native/android/AppUpdatePlugin.java",
+   "native/android/UpdateFileProvider.java",
+   "native/android/res/update_paths.xml",
+   "src/lib/appUpdate.ts",
+   "src/lib/appUpdate.test.ts",
+   "src/lib/updateBridge.ts",
+   "src/services/updateService.ts",
+   "src/app/providers/UpdateProvider.tsx",
+   "src/components/update/UpdateDialog.tsx"
+  ],
+  "size": "M",
+  "kb": 57,
+  "tokens_aprox": 16703,
+  "ask": true,
+  "cubre": [
+   "Avisa de una versión nueva al abrir (Descargar / Cancelar) y desde Ajustes.",
+   "Como mucho una consulta por hora; Cancelar descansa 1 día esa versión.",
+   "Barra de avance; Android pide la confirmación final.",
+   "Solo descarga de GitHub y verifica que el APK sea la app y esté firmado con la misma clave."
+  ],
+  "entrega": "Actualizador contra JhonathanPerez/Mi-Plata-Nativa, FileProvider ${applicationId}.updates y verificación package + firma.",
+  "manual": "",
+  "hito": "hito-etapa-33",
+  "zip": "etapa-33-apk-desde-github.zip"
+ },
+ {
+  "n": 34,
+  "nn": "34",
+  "branch": "feat/ajustes-pantalla-y-acerca-de",
+  "title": "feat(ajustes): agrega la pantalla de ajustes y acerca de",
+  "commits": [
+   "feat(ajustes): agrega la pantalla de ajustes con todas sus secciones",
+   "feat(ajustes): agrega el tema, el acerca de y la comprobación de actualizaciones"
+  ],
+  "adj": [
+   "src/pages/SettingsPage.tsx",
+   "src/app/providers/ThemeProvider.tsx",
+   "src/config/constants.ts"
+  ],
+  "size": "S",
+  "kb": 19,
+  "tokens_aprox": 5530,
+  "ask": true,
+  "cubre": [
+   "Secciones: apariencia, bloqueo, captura, recordatorios, copias, cuentas de ahorro, datos y acerca de.",
+   "Elegir tema claro, oscuro o del sistema.",
+   "Comprobar actualizaciones y ver la versión.",
+   "Aviso permanente de convivencia con el híbrido mientras ambos estén instalados."
+  ],
+  "entrega": "Ajustes completos que enlazan todas las pantallas.",
+  "manual": "",
+  "hito": "hito-etapa-34",
+  "zip": "etapa-34-pantalla-y-acerca-de.zip"
+ },
+ {
+  "n": 35,
+  "nn": "35",
+  "branch": "feat/identidad-icono-y-nombre",
+  "title": "feat(identidad): agrega el ícono, el splash y el nombre de Mi Plata Nativa",
+  "commits": [
+   "feat(identidad): agrega el ícono adaptable y el nombre Mi Plata Nativa",
+   "feat(identidad): agrega el splash y distingue el build debug"
+  ],
+  "adj": [
+   "assets/icon/icon-foreground.svg",
+   "assets/icon/icon-monochrome.svg",
+   "assets/android-res/mipmap-anydpi-v26/ic_launcher.xml",
+   "assets/android-res/values/ic_launcher_background.xml",
+   "assets/android-res/drawable/splash_brand.xml",
+   "scripts/generate-icons.mjs"
+  ],
+  "size": "S",
+  "kb": 7,
+  "tokens_aprox": 2102,
+  "ask": true,
+  "cubre": [
+   "Ícono verde con el anillo de 5 tramos, adaptable y monocromo.",
+   "Splash con la marca.",
+   "En la nativa debe distinguirse del híbrido (propuesta: insignia o tono distinto)."
+  ],
+  "entrega": "Íconos vectoriales y nombre 'Mi Plata Nativa' (debug: 'Mi Plata Nativa (debug)').",
+  "manual": "",
+  "hito": "hito-etapa-35",
+  "zip": "etapa-35-icono-y-nombre.zip"
+ },
+ {
+  "n": 36,
+  "nn": "36",
+  "branch": "test/app-flujos-instrumentados",
+  "title": "test(app): agrega pruebas instrumentadas de los flujos principales",
+  "commits": [
+   "test(app): agrega pruebas instrumentadas de registrar gasto, importar copia y recordatorios"
+  ],
+  "adj": [],
+  "size": "S",
+  "kb": 0,
+  "tokens_aprox": 0,
+  "ask": false,
+  "cubre": [],
+  "entrega": "Pruebas con Compose y Hilt de los flujos clave, más prueba de importación con una copia de ejemplo.",
+  "manual": "",
+  "hito": "hito-etapa-36",
+  "zip": "etapa-36-flujos-instrumentados.zip"
+ },
+ {
+  "n": 37,
+  "nn": "37",
+  "branch": "build/release-firma-r8-y-versionado",
+  "title": "build(release): configura la firma, R8 y el versionado del APK de release",
+  "commits": [
+   "build(release): configura la firma de release desde secretos de CI",
+   "build(release): activa R8 y reglas de conservación, y valida el versionado"
+  ],
+  "adj": [
+   "scripts/apply-android-signing.mjs",
+   "scripts/sync-android-version.mjs",
+   "scripts/harden-android.mjs",
+   ".github/workflows/release.yml"
+  ],
+  "size": "S",
+  "kb": 12,
+  "tokens_aprox": 3640,
+  "ask": false,
+  "cubre": [],
+  "entrega": "signingConfig por variables de entorno, R8 con reglas, versionCode = major*1.000.000 + minor*1.000 + patch, allowBackup=false.",
+  "manual": "Correr Generar-Keystore.ps1 y Cargar-Secretos.ps1 (guarda copia del keystore en un lugar seguro: sin él no podrás actualizar la app).",
+  "hito": "hito-etapa-37",
+  "zip": "etapa-37-firma-r8-y-versionado.zip"
+ },
+ {
+  "n": 38,
+  "nn": "38",
+  "branch": "docs/guias-usuario-y-convivencia",
+  "title": "docs(guias): agrega la guía de usuario y la guía de convivencia con el híbrido",
+  "commits": [
+   "docs(guias): agrega la guía de instalación, importación y convivencia"
+  ],
+  "adj": [
+   "README.md"
+  ],
+  "size": "S",
+  "kb": 11,
+  "tokens_aprox": 3209,
+  "ask": false,
+  "cubre": [],
+  "entrega": "README final, guía para importar desde el híbrido y comparar cifras lado a lado, y cómo desactivar captura/recordatorios en una de las dos apps.",
+  "manual": "",
+  "hito": "hito-etapa-38",
+  "zip": "etapa-38-usuario-y-convivencia.zip"
+ },
+ {
+  "n": 39,
+  "nn": "39",
+  "branch": "ci/release-activar-publicacion",
+  "title": "ci(release): activa el workflow de publicación con semantic-release",
+  "commits": [
+   "ci(release): activa el workflow de publicación",
+   "ci(release): adjunta el APK firmado mi-plata-nativa-vX.Y.Z.apk"
+  ],
+  "adj": [
+   ".github/workflows/release.yml",
+   ".releaserc.json"
+  ],
+  "size": "S",
+  "kb": 7,
+  "tokens_aprox": 2005,
+  "ask": false,
+  "cubre": [],
+  "entrega": "Se quita la condición que mantiene desactivado el workflow. Esta fusión NO debe publicar nada si solo trae ci/docs/test/chore.",
+  "manual": "Verificar que los 4 secretos existen (Cargar-Secretos.ps1 -Solo Verificar).",
+  "hito": "hito-etapa-39",
+  "zip": "etapa-39-activar-publicacion.zip"
+ },
+ {
+  "n": 40,
+  "nn": "40",
+  "branch": "feat/app-publicar-1-0-0",
+  "title": "feat(app): publica la primera versión nativa de Mi Plata (1.0.0)",
+  "commits": [
+   "feat(app): publica la primera versión nativa de Mi Plata"
+  ],
+  "adj": [],
+  "size": "S",
+  "kb": 0,
+  "tokens_aprox": 0,
+  "ask": false,
+  "cubre": [],
+  "entrega": "Lista de verificación final, importación con tu copia real, comparación de cifras con el híbrido y la fusión que dispara semantic-release: sale 1.0.0 con mi-plata-nativa-v1.0.0.apk.",
+  "manual": "Probar en el teléfono con tus datos reales, fusionar el PR y esperar al workflow Release.",
+  "hito": "hito-etapa-40",
+  "zip": "etapa-40-publicar-1-0-0.zip"
+ }
+]

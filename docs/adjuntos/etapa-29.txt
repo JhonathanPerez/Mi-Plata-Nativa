@@ -1,0 +1,14 @@
+# Archivos del repo HÍBRIDO que se adjuntan en esta etapa (rutas relativas a la raíz del híbrido).
+# Los arma Armar-Adjunto.ps1. Una línea por archivo.
+native/android/PendingReminderReceiver.java
+native/android/res/ic_stat_miplata.xml
+src/lib/localNotifications.ts
+src/services/reminderService.ts
+src/services/reminderService.test.ts
+src/services/reminderSync.ts
+src/app/ReminderSync.tsx
+src/components/cards/ReminderSettingsCard.tsx
+src/components/cards/PendingReminderCard.tsx
+src/components/cards/useReminderStatus.ts
+src/pages/PaymentRemindersPage.tsx
+src/pages/PendingRemindersPage.tsx

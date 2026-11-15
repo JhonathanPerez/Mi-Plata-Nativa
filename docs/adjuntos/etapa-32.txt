@@ -1,0 +1,11 @@
+# Archivos del repo HÍBRIDO que se adjuntan en esta etapa (rutas relativas a la raíz del híbrido).
+# Los arma Armar-Adjunto.ps1. Una línea por archivo.
+native/android/CloudFolderPlugin.java
+native/android/CloudFolderStore.java
+native/android/SecretStore.java
+src/lib/cloudFolder.ts
+src/lib/backupSecret.ts
+src/services/cloudBackupService.ts
+src/services/cloudBackupService.test.ts
+src/pages/AutoBackupPage.tsx
+src/components/backup/BackupPasswordSheet.tsx

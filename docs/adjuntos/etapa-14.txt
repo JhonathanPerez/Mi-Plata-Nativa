@@ -1,0 +1,5 @@
+# Archivos del repo HÍBRIDO que se adjuntan en esta etapa (rutas relativas a la raíz del híbrido).
+# Los arma Armar-Adjunto.ps1. Una línea por archivo.
+src/services/statsService.ts
+src/services/exportData.ts
+src/lib/comparison.ts
