@@ -20,7 +20,7 @@ Cualquier IA debe RESPETAR los CHG vigentes (también están resumidos en `docs/
 
 ## Registro
 
-Sin cambios pedidos todavía.
+Sin cambios pedidos todavía. (Etapa 00: sin pregunta de cambios, no hubo CHG.)
 
 ## Decisiones del encargo original (no son CHG)
 

@@ -83,3 +83,7 @@ las cambiadas se marcan «reemplazada por ADR-xx», nunca se borran.
 
 ### ADR-024 — Privacidad y red
 **Decisión:** sin analítica ni servidores propios; `allowBackup=false`; la única conexión de red es la consulta/descarga de actualizaciones a GitHub.
+
+### ADR-025 — Herramientas de Node como ES modules
+**Contexto:** `commitlint.config.js` usa `export default` y `package.json` no declaraba el tipo de módulo; Node avisaba `MODULE_TYPELESS_PACKAGE_JSON` en cada commit y reanalizaba el archivo. **Decisión:** `"type": "module"` en `package.json`; la configuración de commitlint sigue como `commitlint.config.js` en sintaxis ES module.
+**Consecuencias:** cualquier `.js` nuevo en la raíz debe ser ES module (o `.cjs` si usa `require`). `.releaserc.json` y los scripts `.ps1` no se ven afectados. Los avisos de CRLF→LF de los `.ps1` son esperados por `.gitattributes` (`* text=auto eol=lf`); se corrigen una vez con `git add --renormalize .`.
