@@ -52,6 +52,10 @@ mockk = { module = "io.mockk:mockk", version.ref = "mockk" }
 turbine = { module = "app.cash.turbine:turbine", version.ref = "turbine" }
 robolectric = { module = "org.robolectric:robolectric", version.ref = "robolectric" }
 
+# Solo para compilar build-logic (convention plugins).
+android-gradlePlugin = { module = "com.android.tools.build:gradle", version.ref = "agp" }
+kotlin-gradlePlugin = { module = "org.jetbrains.kotlin:kotlin-gradle-plugin", version.ref = "kotlin" }
+
 [plugins]
 # Con AGP 9 Kotlin viene integrado: NO se aplica org.jetbrains.kotlin.android.
 android-application = { id = "com.android.application", version.ref = "agp" }
@@ -61,3 +65,8 @@ kotlin-compose = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "ko
 kotlin-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }
 ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }
 hilt = { id = "com.google.dagger.hilt.android", version.ref = "hilt" }
+
+# Convention plugins propios (carpeta build-logic/, ADR-005). La versión «unspecified» es la convención para builds incluidos.
+miplata-android-application = { id = "miplata.android.application", version = "unspecified" }
+miplata-android-library = { id = "miplata.android.library", version = "unspecified" }
+miplata-jvm-library = { id = "miplata.jvm.library", version = "unspecified" }

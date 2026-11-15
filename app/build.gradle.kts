@@ -1,8 +1,6 @@
-import org.jetbrains.kotlin.gradle.dsl.JvmTarget
-
+// SDK, Java 17, Compose y lint vienen de la convención `miplata.android.application` (build-logic).
 plugins {
-    alias(libs.plugins.android.application)
-    alias(libs.plugins.kotlin.compose)
+    alias(libs.plugins.miplata.android.application)
     alias(libs.plugins.ksp)
     alias(libs.plugins.hilt)
 }
@@ -21,12 +19,9 @@ val computedVersionCode = versionParts[0] * 1_000_000 + versionParts[1] * 1_000 
 
 android {
     namespace = "co.miplata.nativa"
-    compileSdk = 37
 
     defaultConfig {
         applicationId = "co.miplata.nativa"
-        minSdk = 26
-        targetSdk = 36
         versionCode = computedVersionCode
         versionName = appVersion
     }
@@ -42,24 +37,7 @@ android {
     }
 
     buildFeatures {
-        compose = true
         buildConfig = true
-    }
-
-    compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_17
-        targetCompatibility = JavaVersion.VERSION_17
-    }
-
-    lint {
-        abortOnError = true
-        warningsAsErrors = false
-    }
-}
-
-kotlin {
-    compilerOptions {
-        jvmTarget.set(JvmTarget.JVM_17)
     }
 }
 
